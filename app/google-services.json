@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "153524248864",
+    "project_id": "fitstreakf2",
+    "storage_bucket": "fitstreakf2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153524248864:android:f44e004b81ddce5ab8b745",
+        "android_client_info": {
+          "package_name": "com.example.fitstreak"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBa3bfR3xfGcTwd_5MGkD7tpz04CPLKbb0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
