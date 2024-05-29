@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">FitStreak</string>
+    <!--    <string name="web_api_key">153524248864-0o9u45ktn1qnkp5vbbeugd0qp9k4efp0.apps.googleusercontent.com</string>-->
+    <string name="web_api_key">153524248864-bcr3d9kcfaqd7himcl6tjohhcps3mmf1.apps.googleusercontent.com</string>
+    <!--    <string name="web_api_key">AIzaSyBa3bfR3xfGcTwd_5MGkD7tpz04CPLKbb0</string>-->
 </resources>

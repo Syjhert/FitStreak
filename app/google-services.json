@@ -12,7 +12,20 @@
           "package_name": "com.example.fitstreak"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "153524248864-0o9u45ktn1qnkp5vbbeugd0qp9k4efp0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fitstreak",
+            "certificate_hash": "4e34de723dc25d9bec2f36aef4a3ec04df42cc5a"
+          }
+        },
+        {
+          "client_id": "153524248864-bcr3d9kcfaqd7himcl6tjohhcps3mmf1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBa3bfR3xfGcTwd_5MGkD7tpz04CPLKbb0"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "153524248864-bcr3d9kcfaqd7himcl6tjohhcps3mmf1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
