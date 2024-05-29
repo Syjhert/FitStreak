@@ -141,7 +141,7 @@ public class UserSetup extends AppCompatActivity {
         waterRemindMeEvery.setAdapter(waterRemindMeEveryAdapter);
 
         ArrayAdapter<String> waterStartingFromAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,
-                new String[]{"07:30", "9:30", "12:30", "16:30"});
+                new String[]{"5:00","5:30", "6:00", "6:30", "7:00","07:30", "9:30", "12:30", "16:30", "20:30"});
         waterStartingFrom.setAdapter(waterStartingFromAdapter);
 
         sleepStrive = findViewById(R.id.sleepGoalSpan);
@@ -152,7 +152,7 @@ public class UserSetup extends AppCompatActivity {
         sleepStrive.setAdapter(sleepStriveAdapter);
 
         ArrayAdapter<String> sleepSchedSpanAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,
-                new String[]{"07:30", "9:30", "12:30", "16:30"});
+                new String[]{"5:00","5:30", "6:00", "6:30", "7:00","07:30", "9:30", "12:30", "16:30", "20:30"});
         sleepSchedSpan.setAdapter(sleepSchedSpanAdapter);
 
         exerciseSunday = findViewById(R.id.exerciseSunday);
@@ -172,7 +172,7 @@ public class UserSetup extends AppCompatActivity {
         exerciseSpan = findViewById(R.id.exerciseSpan);
 
         ArrayAdapter<String> exerciseSpanAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,
-                new String[]{"07:30", "9:30", "12:30", "16:30"});
+                new String[]{"5:00","5:30", "6:00", "6:30", "7:00","07:30", "9:30", "12:30", "16:30", "20:30"});
         exerciseSpan.setAdapter(exerciseSpanAdapter);
 
         medicineText1 = findViewById(R.id.medicineName1);
@@ -198,11 +198,11 @@ public class UserSetup extends AppCompatActivity {
         medicineTime2 = findViewById(R.id.medicineTime2);
 
         ArrayAdapter<String> medicineTime1Adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,
-                new String[]{"07:30", "9:30", "12:30", "16:30"});
+                new String[]{"5:00","5:30", "6:00", "6:30", "7:00","07:30", "9:30", "12:30", "16:30", "20:30"});
         medicineTime1.setAdapter(medicineTime1Adapter);
 
         ArrayAdapter<String> medicineTime2Adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,
-                new String[]{"07:30", "9:30", "12:30", "16:30"});
+                new String[]{"5:00","5:30", "6:00", "6:30", "7:00","07:30", "9:30", "12:30", "16:30", "20:30"});
         medicineTime2.setAdapter(medicineTime2Adapter);
 
         finish = findViewById(R.id.finish);
@@ -210,12 +210,17 @@ public class UserSetup extends AppCompatActivity {
         finish.setOnClickListener(view -> {
             setAllData();
         });
+
+        exerciseDays = new ArrayList<>();
+        routines = new ArrayList<>();
+        medicine1Days = new ArrayList<>();
+        medicine2Days = new ArrayList<>();
     }
 
-    List<String> exerciseDays = new ArrayList<>();
-    List<String> routines = new ArrayList<>();
-    List<String> medicine1Days = new ArrayList<>();
-    List<String> medicine2Days = new ArrayList<>();
+    List<String> exerciseDays;
+    List<String> routines;
+    List<String> medicine1Days;
+    List<String> medicine2Days;
 
     void setAllData(){
         //Water
@@ -224,28 +229,13 @@ public class UserSetup extends AppCompatActivity {
         long reminder_interval = Long.parseLong(waterRemindMeEvery.getSelectedItem().toString());
         String remind_time_start = waterStartingFrom.getSelectedItem().toString();
 
-
-        System.out.println("Glasses Count Goal: " + glasses_count_goal);
-        System.out.println("Reminder Interval: " + reminder_interval);
-        System.out.println("Remind Time Start: " + remind_time_start);
-
         //Sleep
         Integer sleep_hours_goal = (Integer) sleepStrive.getSelectedItem();
         String sleep_time_start = sleepSchedSpan.getSelectedItem().toString();
 
-
-        System.out.println("Sleep hours goal: " + sleep_hours_goal);
-        System.out.println("Sleep time start: " + sleep_time_start);
-
         //Exerise
         String exerciseName = exerciseTitle.getText().toString();
         String exercise_time_start = exerciseSpan.getSelectedItem().toString();
-
-
-        System.out.println("Exercise Name: " + exerciseName);
-        System.out.println("Exercise Days: "+ exerciseDays);
-        System.out.println("Routines: " + routines);
-        System.out.println("Exercise Time Start: " + exercise_time_start);
 
         if(exerciseSunday.isChecked()) exerciseDays.add("Sunday");
         if(exerciseMonday.isChecked()) exerciseDays.add("Monday");
@@ -269,10 +259,6 @@ public class UserSetup extends AppCompatActivity {
         String medicine1Name = medicineText1.getText().toString();
         String time_to_take1 = medicineTime1.getSelectedItem().toString();
 
-        System.out.println("Medicine Name 1: " + medicine1Name);
-        System.out.println("Time to take 1: " + time_to_take1);
-        System.out.println("Medicine Days: " + medicine1Days);
-
         if(medicineSunday.isChecked()) medicine1Days.add("Sunday");
         if(medicineMonday.isChecked()) medicine1Days.add("Monday");
         if(medicineTuesday.isChecked()) medicine1Days.add("Tuesday");
@@ -284,10 +270,6 @@ public class UserSetup extends AppCompatActivity {
         String medicine2Name = medicineText2.getText().toString();
         String time_to_take2 = medicineTime2.getSelectedItem().toString();
 
-        System.out.println("Medicine Name 2: " + medicine2Name);
-        System.out.println("Time to take 2: " + time_to_take2);
-        System.out.println("Medicine Days 2: " + medicine2Days);
-
         if(medicineSunday2.isChecked()) medicine2Days.add("Sunday");
         if(medicineMonday2.isChecked()) medicine2Days.add("Monday");
         if(medicineTuesday2.isChecked()) medicine2Days.add("Tuesday");
@@ -295,6 +277,23 @@ public class UserSetup extends AppCompatActivity {
         if(medicineThursday2.isChecked()) medicine2Days.add("Thursday");
         if(medicineFriday2.isChecked()) medicine2Days.add("Friday");
         if(medicineSaturday2.isChecked()) medicine2Days.add("Saturday");
+
+        System.out.println("Glasses Count Goal: " + glasses_count_goal);
+        System.out.println("Reminder Interval: " + reminder_interval);
+        System.out.println("Remind Time Start: " + remind_time_start);
+        System.out.println("Sleep hours Start: " + sleep_time_start);
+        System.out.println("Exercise Name: " + exerciseName);
+        System.out.println("Exercise Days: "+ exerciseDays);
+        System.out.println("Routines: " + routines);
+        System.out.println("Exercise Time Start: " + exercise_time_start);
+        System.out.println("Medicine Name 1: " + medicine1Name);
+        System.out.println("Time to take 1: " + time_to_take1);
+        System.out.println("Medicine Days: " + medicine1Days);
+        System.out.println("Medicine Name 2: " + medicine2Name);
+        System.out.println("Time to take 2: " + time_to_take2);
+        System.out.println("Medicine Days 2: " + medicine2Days);
+
+
 
         Water water = new Water(glasses_count_goal, reminder_interval, remind_time_start);
         Sleep sleep = new Sleep(sleep_hours_goal, sleep_time_start);
