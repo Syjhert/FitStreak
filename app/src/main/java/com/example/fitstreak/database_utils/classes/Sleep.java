@@ -12,6 +12,11 @@ public class Sleep {
         sleep_time_start = "16:30";
     }
 
+    public Sleep(int sleep_hours_goal, String sleep_time_start) {
+        this.sleep_time_start = sleep_time_start;
+        this.sleep_hours_goal = sleep_hours_goal;
+    }
+
     public int getSleep_hours_goal() {
         return sleep_hours_goal;
     }

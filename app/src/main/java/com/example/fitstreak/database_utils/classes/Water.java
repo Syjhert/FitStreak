@@ -18,6 +18,12 @@ public class Water {
         remind_time_start = "7:30";
     }
 
+    public Water(int glasses_count_goal, long reminder_interval, String remind_time_start) {
+        this.glasses_count_goal = glasses_count_goal;
+        this.reminder_interval = reminder_interval;
+        this.remind_time_start = remind_time_start;
+    }
+
     public Water(int glass_drank_count, int glasses_count_goal,
                  long reminder_interval, String remind_time_start) {
         this.glass_drank_count = glass_drank_count;

@@ -2,6 +2,7 @@ package com.example.fitstreak;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -10,6 +11,12 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+
+import com.example.fitstreak.activities.SignIn;
+import com.example.fitstreak.database_utils.classes.Exercise;
+import com.example.fitstreak.database_utils.classes.Medicine;
+import com.example.fitstreak.database_utils.classes.Sleep;
+import com.example.fitstreak.database_utils.classes.Water;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -213,8 +220,10 @@ public class UserSetup extends AppCompatActivity {
     void setAllData(){
         //Water
         Integer glasses_count_goal = (Integer) howManyGlasses.getSelectedItem();
-        String reminder_interval = waterRemindMeEvery.getSelectedItem().toString();
+//        String reminder_interval = waterRemindMeEvery.getSelectedItem().toString();
+        long reminder_interval = Long.parseLong(waterRemindMeEvery.getSelectedItem().toString());
         String remind_time_start = waterStartingFrom.getSelectedItem().toString();
+
 
         System.out.println("Glasses Count Goal: " + glasses_count_goal);
         System.out.println("Reminder Interval: " + reminder_interval);
@@ -224,12 +233,14 @@ public class UserSetup extends AppCompatActivity {
         Integer sleep_hours_goal = (Integer) sleepStrive.getSelectedItem();
         String sleep_time_start = sleepSchedSpan.getSelectedItem().toString();
 
+
         System.out.println("Sleep hours goal: " + sleep_hours_goal);
         System.out.println("Sleep time start: " + sleep_time_start);
 
         //Exerise
         String exerciseName = exerciseTitle.getText().toString();
         String exercise_time_start = exerciseSpan.getSelectedItem().toString();
+
 
         System.out.println("Exercise Name: " + exerciseName);
         System.out.println("Exercise Days: "+ exerciseDays);
@@ -248,6 +259,11 @@ public class UserSetup extends AppCompatActivity {
         routines.add(routine2.getText().toString());
         routines.add(routine3.getText().toString());
         routines.add(routine4.getText().toString());
+
+//        List<String> exerciseDays = new ArrayList<>();
+//        List<String> routines = new ArrayList<>();
+
+
 
         //Medicine
         String medicine1Name = medicineText1.getText().toString();
@@ -280,5 +296,19 @@ public class UserSetup extends AppCompatActivity {
         if(medicineFriday2.isChecked()) medicine2Days.add("Friday");
         if(medicineSaturday2.isChecked()) medicine2Days.add("Saturday");
 
+        Water water = new Water(glasses_count_goal, reminder_interval, remind_time_start);
+        Sleep sleep = new Sleep(sleep_hours_goal, sleep_time_start);
+        Exercise exercise = new Exercise(exercise_time_start, exerciseDays, routines);
+        Medicine medicine = new Medicine(
+                medicine1Name, time_to_take1, medicine1Days,
+                medicine2Name, time_to_take2, medicine2Days);
+
+        SignIn.fireStore.setUpUser(water, sleep, exercise, medicine);
+
+        Intent intent = new Intent(UserSetup.this, MainActivity.class);
+        startActivity(intent);
+
+//        List<String> medicine1Days = new ArrayList<>();
+//        List<String> medicine2Days = new ArrayList<>();
     }
 }

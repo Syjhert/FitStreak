@@ -14,6 +14,14 @@ public class Medicine {
         reminders.add(new Reminder("_"));
     }
 
+    public Medicine(String name1, String take1, List<String> days1,
+                    String name2, String take2, List<String> days2) {
+
+         reminders = new ArrayList<>();
+         reminders.add(new Reminder(name1, days1, take1));
+         reminders.add(new Reminder(name2, days2, take2));
+    }
+
     public void addReminder(String medicine_name, String time_to_take, List<String> days_to_take) {
         reminders.add(new Reminder(medicine_name, time_to_take, days_to_take));
     }
@@ -29,6 +37,13 @@ public class Medicine {
         List<String> days_to_take;
 
         public Reminder() {}
+
+        public Reminder(String medicine_name, List<String> days_to_take, String time_to_take) {
+
+            this.medicine_name = medicine_name;
+            this.time_to_take = time_to_take;
+            this.days_to_take = days_to_take;
+        }
 
         public Reminder(String medicine_name, String time_to_take, List<String> days_to_take) {
             this.medicine_name = medicine_name;

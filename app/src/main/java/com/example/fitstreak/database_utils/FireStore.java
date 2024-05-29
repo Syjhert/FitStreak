@@ -7,6 +7,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.fitstreak.MainActivity;
+import com.example.fitstreak.UserSetup;
 import com.example.fitstreak.activities.SignIn;
 import com.example.fitstreak.database_utils.callbacks.DataCallback;
 import com.example.fitstreak.database_utils.callbacks.UpdateCallback;
@@ -44,16 +45,30 @@ public class FireStore {
 
                             if (document != null && document.exists()) {
                                 Log.e("FIRESTORE", "USER EXISTS");
+                                context.startActivity(intent);
                             } else {
                                 Log.e("FIRESTORE", "USER DOES NOT EXIST");
-                                initUser(userId);
+                                Intent b = new Intent(context, UserSetup.class);
+                                context.startActivity(b);
+//                                initUser(userId);
                             }
-                            context.startActivity(intent);
                         } else {
                             Log.e("FIRESTORE", "ERROR");
                         }
                     }
                 });
+    }
+
+    public void setUpUser(Water water, Sleep sleep, Exercise exercise , Medicine medicine) {
+        String UID = SignIn.auth.getCurrentUser().getUid();
+        Map<String, Object> d = new HashMap<>();
+
+        d.put("water", water);
+        d.put("sleep", sleep);
+        d.put("exercise", exercise);
+        d.put("medicine", medicine);
+
+        db.collection("users").document(UID).set(d);
     }
 
     public void initUser(String UID) {
