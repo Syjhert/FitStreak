@@ -19,6 +19,11 @@ public class Exercise {
     public void setExercise_time_start(String exercise_time_start) { this.exercise_time_start = exercise_time_start; }
 
     public List<Routine> getRoutines() { return routines; }
+
+    public void addRoutine(String name, List<String> days, List<String> exercises) {
+        routines.add(new Routine(name, days, exercises));
+    }
+
     public void setRoutines(List<Routine> routines) { this.routines = routines; }
 
     public static class Routine {
@@ -27,6 +32,12 @@ public class Exercise {
         private List<String> exercises;
 
         public Routine() {}
+
+        public Routine(String name, List<String> days, List<String> exercises) {
+            this.name = name;
+            this.days = days;
+            this.exercises = exercises;
+        }
 
         public Routine(String s) {
             days = new ArrayList<>();

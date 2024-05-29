@@ -4,10 +4,19 @@ public class Water {
 
     private int glasses_count_goal;
     private int glass_drank_count;
+
+    // interval in seconds
     private long reminder_interval;
     private String remind_time_start;
 
     public Water() {}
+
+    public Water(String s) {
+        glasses_count_goal = 8;
+        glass_drank_count = 0;
+        reminder_interval = 1200;
+        remind_time_start = "7:30";
+    }
 
     public Water(int glass_drank_count, int glasses_count_goal,
                  long reminder_interval, String remind_time_start) {

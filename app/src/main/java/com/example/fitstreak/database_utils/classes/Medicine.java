@@ -14,6 +14,13 @@ public class Medicine {
         reminders.add(new Reminder("_"));
     }
 
+    public void addReminder(String medicine_name, String time_to_take, List<String> days_to_take) {
+        reminders.add(new Reminder(medicine_name, time_to_take, days_to_take));
+    }
+
+    public List<Reminder> getReminders() { return reminders; }
+
+    public void setReminders(List<Reminder> reminders) { this.reminders = reminders; }
 
     public static class Reminder {
         String medicine_name;
@@ -22,6 +29,12 @@ public class Medicine {
         List<String> days_to_take;
 
         public Reminder() {}
+
+        public Reminder(String medicine_name, String time_to_take, List<String> days_to_take) {
+            this.medicine_name = medicine_name;
+            this.time_to_take = time_to_take;
+            this.days_to_take = days_to_take;
+        }
 
         public Reminder(String s) {
             medicine_name = "tambal";

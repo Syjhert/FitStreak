@@ -57,9 +57,7 @@ public class FireStore {
     }
 
     public void initUser(String UID) {
-        Water water = new Water(
-                3, 8, 1200, "7:30"
-        );
+        Water water = new Water("_");
         Sleep sleep = new Sleep("_");
         Exercise exercise = new Exercise("_");
         Medicine medicine = new Medicine("_");
@@ -69,7 +67,7 @@ public class FireStore {
         d.put("water", water);
         d.put("sleep", sleep);
         d.put("exercise", exercise);
-//        d.put("medicine", medicine);
+        d.put("medicine", medicine);
 
         db.collection("users").document(UID).set(d);
     }
