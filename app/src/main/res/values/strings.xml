@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">FitStreak</string>
+
+    <string name="userStartup">Hello! <b></b> Let\'s set up your user first</string>
+
+    <string name="whenToRemind">When do you want to be reminded?</string>
+    <string name="everyHourRemindOption">Remind me every</string>
+    <string name="startingFrom">Starting From</string>
+
+    <string name="recommendedWater">How many glasses of water do you strive to drink every day? <b></b> (Recommended: 8 glasses)</string>
+
+
+    <string name="recommendedSleep">How much sleep do you strive to get every day? <b></b> (Recommended: 8 hours)</string>
+    <string name="sleepSchedStart">When does your sleeping schedule start</string>
+
+
+    <string name="recommendedExercise">Would you like to get reminded of your exercise routines?</string>
+    <string name="addRoutine">Add your routines:</string>
+    <string name="exerciseSchedStart">When does your exercising schedule start</string>
+    <string name="exerciseDays">Day of the Week</string>
+
+    <string name="recommendedMedicine">Would you like to get reminded of your medicine intake?</string>
+    <string name="addMedicineReminders">Add your medicine reminders:</string>
+    <string name="timeMedicine">What time should you drink your medicine?</string>
+    <string name="dayMedicine">What day of the week should you drink your medicine</string>
+
 </resources>
