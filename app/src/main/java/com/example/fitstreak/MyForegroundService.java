@@ -9,11 +9,12 @@ import android.os.IBinder;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
-
-import java.sql.Time;
 
 public class MyForegroundService extends Service {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -24,6 +25,7 @@ public class MyForegroundService extends Service {
                         while(true){
                             Log.d("TAG", "Foreground service is running...");
                             TimeHandler.handleTime();
+                            TipsHandler.showTip();
                             try{
                                 Thread.sleep(2000);
                             }catch(InterruptedException e){
@@ -39,6 +41,7 @@ public class MyForegroundService extends Service {
 
         getSystemService(NotificationManager.class).createNotificationChannel(channel);
         Notification.Builder notification = new Notification.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.health_icon)
                 .setContentTitle("Fitstreak Foreground")
                         .setContentText("Foreground service is running...");
         startForeground(1001, notification.build());

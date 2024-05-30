@@ -209,6 +209,7 @@ public class UserSetup extends AppCompatActivity {
 
         finish.setOnClickListener(view -> {
             setAllData();
+            finish();
         });
     }
 

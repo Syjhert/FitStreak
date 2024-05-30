@@ -1,15 +1,30 @@
 package com.example.fitstreak;
 
-import androidx.appcompat.app.AppCompatActivity;
+import static androidx.core.app.NotificationCompat.PRIORITY_DEFAULT;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+
+import android.Manifest;
 import android.app.ActivityManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.PowerManager;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fitstreak.activities.SignIn;
 import com.example.fitstreak.database_utils.callbacks.UpdateCallback;
@@ -17,18 +32,19 @@ import com.example.fitstreak.database_utils.callbacks.WaterCallback;
 import com.example.fitstreak.database_utils.classes.Water;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int REQUEST_PERMISSIONS_CODE = 1;
+    private static final int FOREGROUND_PERMISSION_CODE = 2;
+
     LinearLayout WaterLayout;
+    LinearLayout WaterButton;
 
     private static final String CHANNEL_ID = "FitStreak";
     private static final String CHANNEL_NAME = "FitStreak";
     private static final String CHANNEL_DESC = "FitStreak All in one App";
-
-
-    private MyNotificationManager myNotificationManager;
-
     TextView txtDrankWaterCount;
 
-    private static AppCompatActivity instance;
+    public static MainActivity instance;
+
     public static Context getAppContext() {
         return instance.getApplicationContext();
     }
@@ -37,6 +53,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         instance = this;
+
+        MyNotificationManager.setNotifManager((NotificationManager) getSystemService(NotificationManager.class));
+
+        requestNecessaryPermissions();
+
 
         txtDrankWaterCount = findViewById(R.id.txtDrankWaterCount);
 
@@ -48,21 +69,9 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        Intent intent = new Intent(
-                MainActivity.this,
-                MyForegroundService.class
-        );
-        startForegroundService(intent);
-
-//        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
-//        channel.setDescription(CHANNEL_DESC);
-//        NotificationManager manager = getSystemService(NotificationManager.class);
-//        manager.createNotificationChannel(channel);
-
-//        myNotificationManager = new MyNotificationManager(this, CHANNEL_ID);
-
         WaterLayout = (LinearLayout) findViewById(R.id.WaterLayout);
-        WaterLayout.setOnClickListener(new View.OnClickListener() {
+        WaterButton = (LinearLayout) findViewById(R.id.WaterButton);
+        WaterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -90,15 +99,45 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public boolean foregroundServiceRunning(){
-        ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+    private void requestNecessaryPermissions() {
+        if (checkSelfPermission(Manifest.permission.ACTIVITY_RECOGNITION) != PackageManager.PERMISSION_GRANTED ||
+                checkSelfPermission(Manifest.permission.BODY_SENSORS) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissions(new String[]{
+                    Manifest.permission.ACTIVITY_RECOGNITION,
+                    Manifest.permission.BODY_SENSORS,
+                    Manifest.permission.FOREGROUND_SERVICE_HEALTH,
+                    Manifest.permission.POST_NOTIFICATIONS
+            }, REQUEST_PERMISSIONS_CODE);
+            Intent intent = new Intent();
+            intent.setAction(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            } else {
+                // Handle the case where no activity is found to handle the intent
+                Toast.makeText(this, "Battery optimization settings not available on this device", Toast.LENGTH_SHORT).show();
+            }
+        }else{
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    MyForegroundService.class
+            );
+            startForegroundService(intent);
+        }
+    }
 
-        for(ActivityManager.RunningServiceInfo service : activityManager.getRunningServices(Integer.MAX_VALUE)){
-            if(MyForegroundService.class.getName().equals(service.service.getClassName())){
-                return true;
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == REQUEST_PERMISSIONS_CODE){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Intent intent = new Intent(
+                        MainActivity.this,
+                        MyForegroundService.class
+                );
+                startForegroundService(intent);
             }
         }
-        return false;
     }
 
 }

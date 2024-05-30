@@ -38,6 +38,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/WaterButton"
                         android:layout_width="100dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -55,13 +56,13 @@
                             android:textSize="14sp" />
 
                         <TextView
-                                android:id="@+id/txtDrankWaterCount"
-                                android:layout_width="match_parent"
-                                android:layout_height="100dp"
-                                android:gravity="center"
-                                android:textAlignment="center"
-                                android:textColor="#000000"
-                                android:textSize="34sp" />
+                            android:id="@+id/txtDrankWaterCount"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:gravity="center"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="34sp" />
 
                         <TextView
                             android:id="@+id/textView13"

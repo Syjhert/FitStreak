@@ -21,7 +21,6 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.FitStreak"
             tools:targetApi="31">
-
         <activity
                 android:name=".activities.SignIn"
                 android:exported="true" >
@@ -44,23 +43,40 @@
 <!--            </intent-filter>-->
 <!--        </activity>-->
         <activity
-            android:name=".WaterActivity"
-            android:exported="false" />
+                android:name=".WaterActivity"
+                android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:exported="false">
-        </activity>
-
+                android:name=".MainActivity"
+                android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".MainActivity" -->
+        <!-- android:exported="true"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
         <receiver
             android:name=".MyBroadcastReceiver"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED">
+
+                </action>
+                <action android:name="android.intent.action.ACTION_SHUTDOWN">
+
+                </action>
+                <action android:name="android.intent.action.PACKAGE_FIRST_LAUNCH">
+
+                </action>
             </intent-filter>
         </receiver>
 
-        <service android:name=".MyForegroundService" />
+        <service
+            android:name=".MyForegroundService"
+            android:foregroundServiceType="health"
+            android:exported="false">
+
+        </service>
     </application>
 
 </manifest>
