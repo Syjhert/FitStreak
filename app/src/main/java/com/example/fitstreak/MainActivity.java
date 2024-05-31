@@ -30,6 +30,7 @@ import com.example.fitstreak.activities.SignIn;
 import com.example.fitstreak.database_utils.callbacks.UpdateCallback;
 import com.example.fitstreak.database_utils.callbacks.WaterCallback;
 import com.example.fitstreak.database_utils.classes.Water;
+import com.google.firebase.firestore.auth.User;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_PERMISSIONS_CODE = 1;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     LinearLayout WaterLayout;
     LinearLayout WaterButton;
+    LinearLayout CustomLayout;
 
     private static final String CHANNEL_ID = "FitStreak";
     private static final String CHANNEL_NAME = "FitStreak";
@@ -95,6 +97,17 @@ public class MainActivity extends AppCompatActivity {
                     });
                 });
 
+            }
+        });
+        CustomLayout = (LinearLayout) findViewById(R.id.CustomLayout);
+        CustomLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(
+                        MainActivity.this,
+                        UserSetup.class
+                );
+                startActivity(intent);
             }
         });
     }

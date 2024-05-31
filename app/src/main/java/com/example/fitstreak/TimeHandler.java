@@ -24,7 +24,7 @@ public class TimeHandler {
         }else if(exerciseTime.getHour() == currentTime.getHour() && exerciseTime.getMinute() == currentTime.getMinute()){
             MyNotificationManager.postNotification("Fitstreak Exercise", "Exercise");
         }else{
-            MyNotificationManager.postNotification("Default", "Default");
+            MyNotificationManager.postNotification("FitStreak", "Water");
         }
     }
 }
